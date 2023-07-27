@@ -22,5 +22,6 @@ namespace WarehouseMgmt.web.Models
         public string ImageURL { get; set; }
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
+        public IQueryable<Product> ProductList { get; set; }
     }
 }

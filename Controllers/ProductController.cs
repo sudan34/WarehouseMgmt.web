@@ -28,6 +28,14 @@ namespace WarehouseMgmt.web.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> SearchForm()
+        {
+            return View();
+        }
+        public async Task<IActionResult> SearchResult(String SearchProduct)
+        {
+            return View("Index", await _context.Products.Where(p => p.Name.StartsWith(SearchProduct)).ToListAsync());
+        }
         // GET: Product/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -154,14 +162,14 @@ namespace WarehouseMgmt.web.Controllers
             {
                 _context.Products.Remove(product);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(Guid id)
         {
-          return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Products?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
